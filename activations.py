@@ -87,4 +87,4 @@ def hyperbolic_tangent_derivative(x):
     return A, cache
 
 
-##THINK ABOUT LEAKY RELU
+##TODO: LEAKY RELU

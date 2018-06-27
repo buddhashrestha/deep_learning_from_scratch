@@ -25,12 +25,12 @@ def linear_activation_forward(A_prev, W, b, activation):
         Z, linear_cache = linear_forward(A_prev, W, b)
         A, activation_cache = relu(Z)
 
-    elif activation == "relu":
+    elif activation == "bipolar_sigmoid":
         # Inputs: "A_prev, W, b". Outputs: "A, activation_cache".
         Z, linear_cache = linear_forward(A_prev, W, b)
-        A, activation_cache = relu(Z)
+        A, activation_cache = bipolar_sigmoid(Z)
 
-    elif activation == "tahn":
+    elif activation == "tanh":
         # Inputs: "A_prev, W, b". Outputs: "A, activation_cache".
         Z, linear_cache = linear_forward(A_prev, W, b)
         A, activation_cache = hyperbolic_tangent(Z)
@@ -45,7 +45,7 @@ def linear_activation_forward(A_prev, W, b, activation):
     return A, cache
 
 
-def L_model_forward(X, parameters):
+def L_model_forward(X, parameters,activations):
 
     caches = []
     A = X
@@ -55,33 +55,13 @@ def L_model_forward(X, parameters):
     for l in range(1, L+1):
         A_prev = A
         A, cache = linear_activation_forward(A_prev, parameters['W' + str(l)], parameters['b' + str(l)],
-                                             activation="relu")
+                                             activation=activations[l-1])
         caches.append(cache)
 
     # for the last layer
     AL,cache = softmax(A)
 
     return AL, caches
-
-
-def cross_entropy_cost(AL, Y):
-
-    AL_log = -np.log(AL)
-
-    each_element = np.multiply(AL_log, Y)
-    entropy = np.sum(each_element, axis=0)
-
-    return np.mean(entropy)
-
-
-def cross_entropy_derivative(x, y):
-    return x - y  # lamda rakhne ki narakhne??Z
-
-
-def softmax(Z):
-    ex = np.exp(Z - np.max(Z, axis=0))
-    cache = Z
-    return ex / ex.sum(axis=0), cache
 
 
 def one_hot_encoding(targets):
@@ -119,27 +99,21 @@ def linear_activation_backward(dA, cache, activation):
     return dA_prev, dW, db
 
 
-def L_model_backward(AL, dAL, Y, caches):
+def L_model_backward(AL, dAL, Y, caches,activations):
 
     grads = {}
     L = len(caches)  # the number of layers
-    # m = AL.shape[1]
-    # Y = Y.reshape(AL.shape)  # after this line, Y is the same shape as AL
 
-    # Initializing the backpropagation
-    #dAL = cross_entropy_derivative(CE, Y)
-
-    # dAL = - (np.divide(Y, AL) - np.divide(1 - Y, 1 - AL))
     # Lth layer (SIGMOID -> LINEAR) gradients. Inputs: "AL, Y, caches". Outputs: "grads["dAL"], grads["dWL"], grads["dbL"]
     current_cache = caches[L - 1]
     grads["dA" + str(L)], grads["dW" + str(L)], grads["db" + str(L)] = linear_activation_backward(dAL, current_cache,
-                                                                                                  activation="relu")
+                                                                                                  activation=activations[L-1])
 
-    for l in reversed(range(L - 1)):
+    for l in reversed(range(L-1)):
         # lth layer: (RELU -> LINEAR) gradients.
         current_cache = caches[l]
         dA_prev_temp, dW_temp, db_temp = linear_activation_backward(grads["dA" + str(l + 2)], current_cache,
-                                                                    activation="relu")
+                                                                    activation=activations[l])
         grads["dA" + str(l + 1)] = dA_prev_temp
         grads["dW" + str(l + 1)] = dW_temp
         grads["db" + str(l + 1)] = db_temp
