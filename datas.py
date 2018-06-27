@@ -11,7 +11,7 @@ def get_CIFAR10_data(cifar10_dir, num_training=49000, num_validation=1000, num_t
     it for the neural net classifier.
     '''
     # Load the raw CIFAR-10 data
-    X_train, y_train, X_test, y_test = load(cifar10_dir)
+    X_train, y_train, X_test, y_test = load_cifar(cifar10_dir)
 
     # Subsample the data
     mask = range(num_training, num_training + num_validation)
