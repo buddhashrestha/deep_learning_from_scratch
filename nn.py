@@ -15,7 +15,7 @@ np.random.seed(1)
 index = 10
 
 
-training_samples = 10500
+training_samples = 60000
 # Explore your dataset 
 # m_train = train_x_orig.shape[0]
 # num_px = train_x_orig.shape[1]
@@ -32,8 +32,8 @@ training_samples = 10500
 # Reshape the training and test examples 
 train_x_flatten = mnist23.data[:training_samples].T  #train_x_orig.reshape(train_x_orig.shape[0], -1).T   # The "-1" makes reshape flatten the remaining dimensions
 train_y = np.array([mnist23.target[:training_samples]])
-test_x_flatten = mnist23.data[training_samples:14000].T
-test_y = np.array([mnist23.target[training_samples:14000]]) #test_x_orig.reshape(test_x_orig.shape[0], -1).T
+test_x_flatten = mnist23.data[training_samples:].T
+test_y = np.array([mnist23.target[training_samples:]]) #test_x_orig.reshape(test_x_orig.shape[0], -1).T
 
 # Standardize data to have feature values between 0 and 1.
 train_x = train_x_flatten / 255.
@@ -50,7 +50,7 @@ n_h = 7
 n_y = 1
 layers_dims = (n_x, n_h, n_y)
 ### CONSTANTS ###
-layers_dims = [784, 10, 4, 2] #  5-layer model
+layers_dims = [784, 20, 12, 4,10] #  5-layer model
 # layers_dims = [12288, 20, 7, 5, 1] #  5-layer model
 # GRADED FUNCTION: n_layer_model
 
@@ -121,7 +121,7 @@ def L_layer_model(X, Y, layers_dims, learning_rate=0.085, num_iterations=3000, p
 
 # parameters = L_layer_model(train_x, train_y, layers_dims, num_iterations=2500, print_cost=True)
 
-parameters = L_layer_model(train_x,train_y , layers_dims, num_iterations=1000, print_cost=True)
+parameters = L_layer_model(train_x,train_y , layers_dims, num_iterations=3000, print_cost=True)
 
 pred_train = predict(train_x, train_y, parameters)
 
