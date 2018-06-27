@@ -133,13 +133,13 @@ def update_parameters(parameters, grads, learning_rate):
     return parameters
 
 
-def predict(X, y, parameters):
+def predict(X, y, parameters,activations):
 
     m = X.shape[1]
     n = len(parameters) // 2  # number of layers in the neural network
     p = np.zeros((1, m), dtype=int)
     # Forward propagation
-    probas, caches = L_model_forward(X, parameters)
+    probas, caches = L_model_forward(X, parameters,activations)
 
     predicted_output = np.argmax(probas, axis=0)
 

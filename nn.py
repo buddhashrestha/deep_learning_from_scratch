@@ -11,7 +11,7 @@ from datas import *
 
 
 
-def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.06 , num_iterations=5000, print_cost=False): #lr was 0.009
+def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.085 , num_iterations=5000, print_cost=False): #lr was 0.009
 
     np.random.seed(1)
     costs = []                         # keep track of cost
@@ -61,10 +61,10 @@ activations = ["relu","relu","relu","relu"]
 layers_dims = [3072, 28, 15, 7, 10] #  5-layer model for cifar-10 data
 # layers_dims = [784, 28, 15, 7, 10] #  5-layer model for mnist data
 
-parameters = L_layer_model(train_x,train_y , activations, layers_dims, num_iterations=5000, print_cost=True)
+parameters = L_layer_model(train_x,train_y , activations, layers_dims, num_iterations=200, print_cost=True)
 
-pred_train = predict(train_x, train_y, parameters)
+pred_train = predict(train_x, train_y, parameters,activations)
 
-pred_train = predict(test_x, test_y, parameters)
+pred_train = predict(test_x, test_y, parameters,activations)
 print("Everything good :", pred_train)
 
