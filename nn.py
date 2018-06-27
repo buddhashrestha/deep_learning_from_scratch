@@ -40,7 +40,7 @@ layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 # layers_dims = [12288, 20, 7, 5, 1] #  5-layer model
 # GRADED FUNCTION: n_layer_model
 
-def L_layer_model(X, Y, layers_dims, learning_rate=0.09, num_iterations=5000, print_cost=False): #lr was 0.009
+def L_layer_model(X, Y, layers_dims, learning_rate=0.15, num_iterations=5000, print_cost=False): #lr was 0.009
 
     np.random.seed(1)
     costs = []                         # keep track of cost

@@ -3,41 +3,19 @@ from activations import *
 # import matplotlib.pyplot as plt
 
 def relu_backward(dA, cache):
-    """
-    Implement the backward propagation for a single RELU unit.
-
-    Arguments:
-    dA -- post-activation gradient, of any shape
-    cache -- 'Z' where we store for computing backward propagation efficiently
-
-    Returns:
-    dZ -- Gradient of the cost with respect to Z
-    """
 
     Z = cache
+
     dZ = np.array(dA, copy=True)  # just converting dz to a correct object.
 
     # When z <= 0, you should set dz to 0 as well.
     # dZ[Z > 0] = 1
     dZ[Z <= 0] = 0
 
-    assert (dZ.shape == Z.shape)
-
     return dZ
 
 
 def sigmoid_backward(dA, cache):
-    """
-    Implement the backward propagation for a single SIGMOID unit.
-
-    Arguments:
-    dA -- post-activation gradient, of any shape
-    cache -- 'Z' where we store for computing backward propagation efficiently
-
-    Returns:
-    dZ -- Gradient of the cost with respect to Z
-    THIS CAN BE REPLACED BY
-    """
 
     Z = cache
 
@@ -50,51 +28,8 @@ def sigmoid_backward(dA, cache):
 
 
 
-def initialize_parameters(n_x, n_h, n_y):
-    """
-    Argument:
-    n_x -- size of the input layer
-    n_h -- size of the hidden layer
-    n_y -- size of the output layer
-
-    Returns:
-    parameters -- python dictionary containing your parameters:
-                    W1 -- weight matrix of shape (n_h, n_x)
-                    b1 -- bias vector of shape (n_h, 1)
-                    W2 -- weight matrix of shape (n_y, n_h)
-                    b2 -- bias vector of shape (n_y, 1)
-    """
-
-    np.random.seed(1)
-
-    W1 = np.random.randn(n_h, n_x) * 0.01
-    b1 = np.zeros((n_h, 1))
-    W2 = np.random.randn(n_y, n_h) * 0.01
-    b2 = np.zeros((n_y, 1))
-
-    assert (W1.shape == (n_h, n_x))
-    assert (b1.shape == (n_h, 1))
-    assert (W2.shape == (n_y, n_h))
-    assert (b2.shape == (n_y, 1))
-
-    parameters = {"W1": W1,
-                  "b1": b1,
-                  "W2": W2,
-                  "b2": b2}
-
-    return parameters
-
 
 def initialize_parameters_deep(layer_dims):
-    """
-    Arguments:
-    layer_dims -- python array (list) containing the dimensions of each layer in our network
-
-    Returns:
-    parameters -- python dictionary containing your parameters "W1", "b1", ..., "WL", "bL":
-                    Wl -- weight matrix of shape (layer_dims[l], layer_dims[l-1])
-                    bl -- bias vector of shape (layer_dims[l], 1)
-    """
 
     np.random.seed(1)
     parameters = {}
@@ -128,6 +63,12 @@ def linear_activation_forward(A_prev, W, b, activation):
         # Inputs: "A_prev, W, b". Outputs: "A, activation_cache".
         Z, linear_cache = linear_forward(A_prev, W, b)
         A, activation_cache = relu(Z)
+
+    elif activation == "relu":
+        # Inputs: "A_prev, W, b". Outputs: "A, activation_cache".
+        Z, linear_cache = linear_forward(A_prev, W, b)
+        A, activation_cache = relu(Z)
+
 
     elif activation == "softmax":
         # Inputs: "A_prev, W, b". Outputs: "A, activation_cache".
@@ -187,16 +128,6 @@ def one_hot_encoding(targets):
 
 
 def compute_cost(AL, Y):
-    """
-    Implement the cost function defined by shape (7).
-
-    Arguments:
-    AL -- probability vector corresponding to your label predictions, shape (1, number of examples)
-    Y -- true "label" vector (for example: containing 0 if non-cat, 1 if cat), shape (1, number of examples)
-
-    Returns:
-    cost -- cross-entropy cost
-    """
 
     m = Y.shape[1]
     # Compute loss from aL and y.
@@ -204,24 +135,11 @@ def compute_cost(AL, Y):
 
     cost = np.squeeze(cost)  # To make sure your cost's shape is what we expect (e.g. this turns [[17]] into 17).
 
-    # assert(cost.shape == ())
-
     return cost
 
 
 def linear_backward(dZ, cache):
-    """
-    Implement the linear portion of backward propagation for a single layer (layer l)
 
-    Arguments:
-    dZ -- Gradient of the cost with respect to the linear output (of current layer l)
-    cache -- tuple of values (A_prev, W, b) coming from the forward propagation in the current layer
-
-    Returns:
-    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev
-    dW -- Gradient of the cost with respect to W (current layer l), same shape as W
-    db -- Gradient of the cost with respect to b (current layer l), same shape as b
-    """
     A_prev, W, b = cache
     m = A_prev.shape[1]
 
@@ -229,27 +147,11 @@ def linear_backward(dZ, cache):
     db = 1. / m * np.sum(dZ, axis=1, keepdims=True)
     dA_prev = np.dot(W.T, dZ)
 
-    assert (dA_prev.shape == A_prev.shape)
-    assert (dW.shape == W.shape)
-    assert (db.shape == b.shape)
-
     return dA_prev, dW, db
 
 
 def linear_activation_backward(dA, cache, activation):
-    """
-    Implement the backward propagation for the LINEAR->ACTIVATION layer.
 
-    Arguments:
-    dA -- post-activation gradient for current layer l
-    cache -- tuple of values (linear_cache, activation_cache) we store for computing backward propagation efficiently
-    activation -- the activation to be used in this layer, stored as a text string: "sigmoid" or "relu"
-
-    Returns:
-    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev
-    dW -- Gradient of the cost with respect to W (current layer l), same shape as W
-    db -- Gradient of the cost with respect to b (current layer l), same shape as b
-    """
     linear_cache, activation_cache = cache
 
     if activation == "relu":
@@ -264,22 +166,7 @@ def linear_activation_backward(dA, cache, activation):
 
 
 def L_model_backward(CE, AL, Y, caches):
-    """
-    Implement the backward propagation for the [LINEAR->RELU] * (L-1) -> LINEAR -> SIGMOID group
 
-    Arguments:
-    AL -- probability vector, output of the forward propagation (L_model_forward())
-    Y -- true "label" vector (containing 0 if non-cat, 1 if cat)
-    caches -- list of caches containing:
-                every cache of linear_activation_forward() with "relu" (there are (L-1) or them, indexes from 0 to L-2)
-                the cache of linear_activation_forward() with "sigmoid" (there is one, index L-1)
-
-    Returns:
-    grads -- A dictionary with the gradients
-             grads["dA" + str(l)] = ...
-             grads["dW" + str(l)] = ...
-             grads["db" + str(l)] = ...
-    """
     grads = {}
     L = len(caches)  # the number of layers
     m = AL.shape[1]
@@ -307,18 +194,6 @@ def L_model_backward(CE, AL, Y, caches):
 
 
 def update_parameters(parameters, grads, learning_rate):
-    """
-    Update parameters using gradient descent
-
-    Arguments:
-    parameters -- python dictionary containing your parameters
-    grads -- python dictionary containing your gradients, output of L_model_backward
-
-    Returns:
-    parameters -- python dictionary containing your updated parameters
-                  parameters["W" + str(l)] = ...
-                  parameters["b" + str(l)] = ...
-    """
 
     L = len(parameters) // 2  # number of layers in the neural network
 
@@ -331,16 +206,6 @@ def update_parameters(parameters, grads, learning_rate):
 
 
 def predict(X, y, parameters):
-    """
-    This function is used to predict the results of a  L-layer neural network.
-
-    Arguments:
-    X -- data set of examples you would like to label
-    parameters -- parameters of the trained model
-
-    Returns:
-    p -- predictions for the given dataset X
-    """
 
     m = X.shape[1]
     n = len(parameters) // 2  # number of layers in the neural network
