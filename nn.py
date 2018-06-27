@@ -81,7 +81,7 @@ def L_layer_model(X, Y, layers_dims, learning_rate=0.09, num_iterations=5000, pr
 
     return parameters
 
-parameters = L_layer_model(train_x,train_y , layers_dims, num_iterations=3000, print_cost=True)
+parameters = L_layer_model(train_x,train_y , layers_dims, num_iterations=4500, print_cost=True)
 
 pred_train = predict(train_x, train_y, parameters)
 
