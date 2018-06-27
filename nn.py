@@ -69,6 +69,8 @@ train_x,train_y,test_x,test_y = split_test_train(mnist,0.8)
 
 train_x = whiten_data(train_x)
 
+test_x = whiten_data(test_x)
+
 parameters = L_layer_model(train_x,train_y , activations, layers_dims, num_iterations=5000, print_cost=True)
 
 pred_train = predict(train_x, train_y, parameters)
