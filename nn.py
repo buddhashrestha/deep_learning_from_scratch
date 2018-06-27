@@ -24,7 +24,7 @@ def whiten_data(x):
 activations = ["relu","relu","relu","relu"]
 layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 
-def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.09, num_iterations=5000, print_cost=False): #lr was 0.009
+def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.06 , num_iterations=5000, print_cost=False): #lr was 0.009
 
     np.random.seed(1)
     costs = []                         # keep track of cost
