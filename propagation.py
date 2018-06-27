@@ -55,7 +55,7 @@ def L_model_forward(X, parameters,activations):
     for l in range(1, L+1):
         A_prev = A
         A, cache = linear_activation_forward(A_prev, parameters['W' + str(l)], parameters['b' + str(l)],
-                                             activation=activations[l-1])
+                                             activation="relu")
         caches.append(cache)
 
     # for the last layer
@@ -107,13 +107,13 @@ def L_model_backward(AL, dAL, Y, caches,activations):
     # Lth layer (SIGMOID -> LINEAR) gradients. Inputs: "AL, Y, caches". Outputs: "grads["dAL"], grads["dWL"], grads["dbL"]
     current_cache = caches[L - 1]
     grads["dA" + str(L)], grads["dW" + str(L)], grads["db" + str(L)] = linear_activation_backward(dAL, current_cache,
-                                                                                                  activation=activations[L-1])
+                                                                                                  activation="relu")
 
     for l in reversed(range(L-1)):
         # lth layer: (RELU -> LINEAR) gradients.
         current_cache = caches[l]
         dA_prev_temp, dW_temp, db_temp = linear_activation_backward(grads["dA" + str(l + 2)], current_cache,
-                                                                    activation=activations[l])
+                                                                    activation="relu")
         grads["dA" + str(l + 1)] = dA_prev_temp
         grads["dW" + str(l + 1)] = dW_temp
         grads["db" + str(l + 1)] = db_temp
@@ -133,13 +133,13 @@ def update_parameters(parameters, grads, learning_rate):
     return parameters
 
 
-def predict(X, y, parameters,activations):
+def predict(X, y, parameters):
 
     m = X.shape[1]
     n = len(parameters) // 2  # number of layers in the neural network
     p = np.zeros((1, m), dtype=int)
     # Forward propagation
-    probas, caches = L_model_forward(X, parameters,activations)
+    probas, caches = L_model_forward(X, parameters)
 
     predicted_output = np.argmax(probas, axis=0)
 

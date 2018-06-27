@@ -9,7 +9,7 @@ def compute_cost(AL, Y, loss="cross_entropy"):
         derivative = cross_entropy_backward(AL, Y)
         return cost, derivative
     else:
-        cost = cross_entropy(AL, Y)
+        cost = mean_squared_error(AL, Y)
         derivative = cross_entropy_backward(AL, Y)
         return cost, derivative
 
@@ -29,6 +29,8 @@ def cross_entropy_backward(x, y):
 def mean_squared_error(AL, Y):
     return np.mean(np.sum(np.square(AL - Y), axis=0))
 
+def mean_squared_error_backward(x,y):
+    return x-y
 
 def logistics(AL, Y):
 
