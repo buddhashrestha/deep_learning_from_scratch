@@ -21,7 +21,7 @@ def whiten_data(x):
     return x/255
 
 ### CONSTANTS ###
-activations = ["sigmoid","relu","sigmoid","relu"]
+activations = ["relu","relu","relu","relu"]
 layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 
 def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.1, num_iterations=5000, print_cost=False): #lr was 0.009
