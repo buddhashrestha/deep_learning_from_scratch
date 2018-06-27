@@ -1,7 +1,5 @@
 import numpy as np
 
-
-
 def sigmoid(Z):
     """
     Implements the sigmoid activation in numpy
