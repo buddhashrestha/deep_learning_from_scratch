@@ -7,6 +7,14 @@ def sigmoid(Z):
 
     return A, cache
 
+def sigmoid_backward(dA, cache):
+
+    Z = cache
+
+    s = 1 / (1 + np.exp(-Z))
+    dZ = dA * s * (1 - s)
+
+    return dZ
 
 def relu(Z):
 
@@ -17,6 +25,18 @@ def relu(Z):
     return A, cache
 
 
+def relu_backward(dA, cache):
+
+    Z = cache
+
+    dZ = np.array(dA, copy=True)  # just converting dz to a correct object.
+
+    # When z <= 0, you should set dz to 0 as well.
+    # dZ[Z > 0] = 1
+    dZ[Z <= 0] = 0
+
+    return dZ
+
 def softmax(Z):
 
     A = np.exp(Z - np.max(Z, axis=0))
@@ -24,13 +44,24 @@ def softmax(Z):
     return A / A.sum(axis=0), cache
 
 
-def bipolar_sigmoid_function(Z):
-    A = 2.0 / (1.0 + np.exp(-Z)) - 1.0
+def bipolar_sigmoid(Z):
+    A = (1.0 - np.square(Z)) / 2.0
 
     cache = Z
 
     return A, cache
 
+def bipolar_sigmoid_backward(dA, cache):
+
+    Z = cache
+
+    dZ = np.array(dA, copy=True)  # just converting dz to a correct object.
+
+    # When z <= 0, you should set dz to 0 as well.
+    # dZ[Z > 0] = 1
+    dZ[Z <= 0] = 0
+
+    return dZ
 
 def bipolar_sigmoid_function_derivative(Z):
     A = (1.0 - np.square(Z)) / 2.0
