@@ -1,0 +1,34 @@
+lr = 0.085, epoch = 3000, layers_dims = [784, 20, 12, 4,10]
+
+Cost after iteration 0: 2.428576
+Cost after iteration 100: 1.805789
+Cost after iteration 200: 1.734093
+Cost after iteration 300: 1.666927
+Cost after iteration 400: 1.578540
+Cost after iteration 500: 1.518677
+Cost after iteration 600: 1.447230
+Cost after iteration 700: 1.387154
+Cost after iteration 800: 1.343432
+Cost after iteration 900: 1.296821
+Cost after iteration 1000: 1.255538
+Cost after iteration 1100: 1.224694
+Cost after iteration 1200: 1.196546
+Cost after iteration 1300: 1.158024
+Cost after iteration 1400: 1.111799
+Cost after iteration 1500: 1.054658
+Cost after iteration 1600: 0.961193
+Cost after iteration 1700: 0.894543
+Cost after iteration 1800: 0.853452
+Cost after iteration 1900: 0.825477
+Cost after iteration 2000: 0.802257
+Cost after iteration 2100: 0.784116
+Cost after iteration 2200: 0.767545
+Cost after iteration 2300: 0.754222
+Cost after iteration 2400: 0.741012
+Cost after iteration 2500: 0.729742
+Cost after iteration 2600: 0.720380
+Cost after iteration 2700: 0.709478
+Cost after iteration 2800: 0.686136
+Cost after iteration 2900: 0.661222
+Accuracy train:  0.827
+Accuracy test :  0.8164
