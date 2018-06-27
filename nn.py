@@ -5,7 +5,7 @@ import numpy as np
 from propagation import *
 from activations import *
 from Initializations import *
-from Costs import Cost
+from Costs import *
 import cloudpickle as pickle
 mnist23 = pickle.load( open( "mnist.data", "rb" ) )
 
@@ -56,7 +56,7 @@ def L_layer_model(X, Y, layers_dims, learning_rate=0.06, num_iterations=5000, pr
         AL, caches = L_model_forward(X, parameters)
 
         # Compute cost and derivative with respect to output
-        cost, dAL  = Cost.compute(AL,Y,"cross_entropy")
+        cost, dAL  = compute_cost(AL,Y,"cross_entropy")
 
         # Backward propagation.
         grads = L_model_backward(AL, dAL, Y, caches)
