@@ -2,10 +2,10 @@ import time
 import numpy as np
 #import matplotlib.pyplot as plt
 
-from dnn_app_utils import *
+from propagation import *
 from activations import *
 from Initializations import *
-
+from Costs import Cost
 import cloudpickle as pickle
 mnist23 = pickle.load( open( "mnist.data", "rb" ) )
 
@@ -39,7 +39,7 @@ print ("test_x's shape: " + str(test_x.shape))
 ### CONSTANTS ###
 layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 
-def L_layer_model(X, Y, layers_dims, learning_rate=0.14, num_iterations=5000, print_cost=False): #lr was 0.009
+def L_layer_model(X, Y, layers_dims, learning_rate=0.06, num_iterations=5000, print_cost=False): #lr was 0.009
 
     np.random.seed(1)
     costs = []                         # keep track of cost
@@ -55,15 +55,12 @@ def L_layer_model(X, Y, layers_dims, learning_rate=0.14, num_iterations=5000, pr
         # Forward propagation: [LINEAR -> RELU]*(L-1) -> LINEAR -> SIGMOID.
         AL, caches = L_model_forward(X, parameters)
 
-        CE,cache = softmax(AL)
-
-        # Compute cost.
-        cost = cross_entropy_cost(CE, Y)
+        # Compute cost and derivative with respect to output
+        cost, dAL  = Cost.compute(AL,Y,"cross_entropy")
 
         # Backward propagation.
-        grads = L_model_backward(CE, AL, Y, caches)
-        ### END CODE HERE ###
- 
+        grads = L_model_backward(AL, dAL, Y, caches)
+
         # Update parameters.
         parameters = update_parameters(parameters, grads, learning_rate)
 

@@ -4,10 +4,6 @@ from activations import *
 
 
 
-
-
-
-
 def linear_forward(A, W, b):
 
     Z = W.dot(A) + b
@@ -56,15 +52,14 @@ def L_model_forward(X, parameters):
     L = len(parameters) // 2  # number of layers in the neural network
 
     # Implement [LINEAR -> RELU]*(L-1). Add "cache" to the "caches" list.
-    for l in range(1, L):
+    for l in range(1, L+1):
         A_prev = A
         A, cache = linear_activation_forward(A_prev, parameters['W' + str(l)], parameters['b' + str(l)],
                                              activation="relu")
         caches.append(cache)
 
-    # Implement LINEAR -> SIGMOID. Add "cache" to the "caches" list.
-    AL, cache = linear_activation_forward(A, parameters['W' + str(L)], parameters['b' + str(L)], activation="relu")
-    caches.append(cache)
+    # for the last layer
+    AL,cache = softmax(A)
 
     return AL, caches
 
@@ -97,17 +92,6 @@ def one_hot_encoding(targets):
     return np.eye(output_dimension)[int_targets].T
 
 
-def compute_cost(AL, Y):
-
-    m = Y.shape[1]
-    # Compute loss from aL and y.
-    cost = (1. / m) * (-np.dot(Y, np.log(AL).T) - np.dot(1 - Y, np.log(1 - AL).T))
-
-    cost = np.squeeze(cost)  # To make sure your cost's shape is what we expect (e.g. this turns [[17]] into 17).
-
-    return cost
-
-
 def linear_backward(dZ, cache):
 
     A_prev, W, b = cache
@@ -135,15 +119,15 @@ def linear_activation_backward(dA, cache, activation):
     return dA_prev, dW, db
 
 
-def L_model_backward(CE, AL, Y, caches):
+def L_model_backward(AL, dAL, Y, caches):
 
     grads = {}
     L = len(caches)  # the number of layers
-    m = AL.shape[1]
+    # m = AL.shape[1]
     # Y = Y.reshape(AL.shape)  # after this line, Y is the same shape as AL
 
     # Initializing the backpropagation
-    dAL = cross_entropy_derivative(CE, Y)
+    #dAL = cross_entropy_derivative(CE, Y)
 
     # dAL = - (np.divide(Y, AL) - np.divide(1 - Y, 1 - AL))
     # Lth layer (SIGMOID -> LINEAR) gradients. Inputs: "AL, Y, caches". Outputs: "grads["dAL"], grads["dWL"], grads["dbL"]
