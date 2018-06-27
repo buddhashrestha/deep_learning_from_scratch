@@ -28,21 +28,6 @@ def sigmoid_backward(dA, cache):
 
 
 
-
-def initialize_parameters_deep(layer_dims):
-
-    np.random.seed(1)
-    parameters = {}
-    L = len(layer_dims)  # number of layers in the network
-
-    for l in range(1, L):
-        # parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l - 1]) * 0.1 / np.sqrt(layer_dims[l - 1])
-        parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l - 1]) * np.sqrt(2.0 / layer_dims[l - 1])
-        parameters['b' + str(l)] = np.zeros((layer_dims[l], 1))
-
-    return parameters
-
-
 def linear_forward(A, W, b):
 
     Z = W.dot(A) + b
@@ -68,6 +53,11 @@ def linear_activation_forward(A_prev, W, b, activation):
         # Inputs: "A_prev, W, b". Outputs: "A, activation_cache".
         Z, linear_cache = linear_forward(A_prev, W, b)
         A, activation_cache = relu(Z)
+
+    elif activation == "tahn":
+        # Inputs: "A_prev, W, b". Outputs: "A, activation_cache".
+        Z, linear_cache = linear_forward(A_prev, W, b)
+        A, activation_cache = hyperbolic_tangent(Z)
 
 
     elif activation == "softmax":

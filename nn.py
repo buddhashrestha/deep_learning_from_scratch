@@ -4,6 +4,7 @@ import numpy as np
 
 from dnn_app_utils import *
 from activations import *
+from Initializations import *
 
 import cloudpickle as pickle
 mnist23 = pickle.load( open( "mnist.data", "rb" ) )
@@ -40,13 +41,14 @@ layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 # layers_dims = [12288, 20, 7, 5, 1] #  5-layer model
 # GRADED FUNCTION: n_layer_model
 
-def L_layer_model(X, Y, layers_dims, learning_rate=0.15, num_iterations=5000, print_cost=False): #lr was 0.009
+def L_layer_model(X, Y, layers_dims, learning_rate=0.1, num_iterations=5000, print_cost=False): #lr was 0.009
 
     np.random.seed(1)
     costs = []                         # keep track of cost
     threshold = 0.0001
+
     # Parameters initialization.
-    parameters = initialize_parameters_deep(layers_dims)
+    parameters = he_weight_initializer(layers_dims)
     Y = one_hot_encoding(Y)
     Y = Y.reshape(Y.shape[0],training_samples)
     # Loop (gradient descent)
@@ -81,7 +83,7 @@ def L_layer_model(X, Y, layers_dims, learning_rate=0.15, num_iterations=5000, pr
 
     return parameters
 
-parameters = L_layer_model(train_x,train_y , layers_dims, num_iterations=4500, print_cost=True)
+parameters = L_layer_model(train_x,train_y , layers_dims, num_iterations=3000, print_cost=True)
 
 pred_train = predict(train_x, train_y, parameters)
 
