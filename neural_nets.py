@@ -1,6 +1,6 @@
 import time
 import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 from propagation import *
 from activations import *
@@ -42,12 +42,12 @@ def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.085 , num_iter
             costs.append(cost)
 
 
-    # plot the cost
-    # plt.plot(np.squeeze(costs))
-    # plt.ylabel('cost')
-    # plt.xlabel('iterations (per tens)')
-    # plt.title("Learning rate =" + str(learning_rate))
-    # plt.show()
+    #plot the cost
+    plt.plot(np.squeeze(costs))
+    plt.ylabel('cost')
+    plt.xlabel('iterations (per tens)')
+    plt.title("Learning rate =" + str(learning_rate))
+    plt.show()
 
     return parameters
 
