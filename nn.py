@@ -6,23 +6,10 @@ from propagation import *
 from activations import *
 from Initializations import *
 from Costs import *
-import cloudpickle as pickle
+from datas import *
 
 
-def split_test_train(data_name, percentage=0.8):
-    training_samples = int(data_name.data.shape[0] * percentage)
-    train_x = data_name.data[:training_samples].T  # train_x_orig.reshape(train_x_orig.shape[0], -1).T   # The "-1" makes reshape flatten the remaining dimensions
-    train_y = np.array([data_name.target[:training_samples]])
-    test_x = data_name.data[training_samples:].T
-    test_y = np.array([data_name.target[training_samples:]])  # test_x_orig.reshape(test_x_orig.shape[0], -1).T
-    return train_x,train_y,test_x,test_y
 
-def whiten_data(x):
-    return x/255
-
-### CONSTANTS ###
-activations = ["relu","relu","relu","relu"]
-layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 
 def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.06 , num_iterations=5000, print_cost=False): #lr was 0.009
 
@@ -53,7 +40,8 @@ def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.06 , num_itera
         if print_cost and i % 100 == 0:
             print ("Cost after iteration %i: %f" % (i, cost))
             costs.append(cost)
-            
+
+
     # plot the cost
     # plt.plot(np.squeeze(costs))
     # plt.ylabel('cost')
@@ -63,13 +51,15 @@ def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.06 , num_itera
 
     return parameters
 
-mnist = pickle.load(open("mnist.data", "rb"))
+train_x,train_y,test_x,test_y = load_cifar('./Assignment One/cifar-10-python/cifar-10-batches-py')
+# train_x,train_y,test_x,test_y = load_mnist("mnist.data",split=0.8)
 
-train_x,train_y,test_x,test_y = split_test_train(mnist,0.8)
 
-train_x = whiten_data(train_x)
+### CONSTANTS ###
+activations = ["relu","relu","relu","relu"]
 
-test_x = whiten_data(test_x)
+layers_dims = [3072, 28, 15, 7, 10] #  5-layer model for cifar-10 data
+# layers_dims = [784, 28, 15, 7, 10] #  5-layer model for mnist data
 
 parameters = L_layer_model(train_x,train_y , activations, layers_dims, num_iterations=5000, print_cost=True)
 
