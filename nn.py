@@ -24,7 +24,7 @@ def whiten_data(x):
 activations = ["sigmoid","relu","sigmoid","relu"]
 layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 
-def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.06, num_iterations=5000, print_cost=False): #lr was 0.009
+def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.1, num_iterations=5000, print_cost=False): #lr was 0.009
 
     np.random.seed(1)
     costs = []                         # keep track of cost
@@ -69,7 +69,7 @@ train_x,train_y,test_x,test_y = split_test_train(mnist,0.8)
 
 train_x = whiten_data(train_x)
 
-parameters = L_layer_model(train_x,train_y , activations, layers_dims, num_iterations=3000, print_cost=True)
+parameters = L_layer_model(train_x,train_y , activations, layers_dims, num_iterations=5000, print_cost=True)
 
 pred_train = predict(train_x, train_y, parameters)
 
