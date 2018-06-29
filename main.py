@@ -4,7 +4,7 @@ from neural_nets import *
 
 ################################## FOR CIFAR-10 DATA SET ###################################################
 
-train_x,train_y,test_x,test_y = load_cifar('/home/buddha/projects/deep_learning_from_scratch/Assignment One/cifar-10-python/cifar-10-batches-py')
+train_x,train_y,test_x,test_y = load_cifar('./Assignment One/cifar-10-python/cifar-10-batches-py')
 #
 #
 # ## CONSTANTS ###
