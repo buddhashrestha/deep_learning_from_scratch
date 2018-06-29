@@ -1,15 +1,15 @@
 lr = 0.085, epoch = 3000, layers_dims = [784, 20, 12, 4,10]
 
-Cost after iteration 0: 2.428576
-Cost after iteration 100: 1.805789
-Cost after iteration 200: 1.734093
-Cost after iteration 300: 1.666927
-Cost after iteration 400: 1.578540
-Cost after iteration 500: 1.518677
-Cost after iteration 600: 1.447230
-Cost after iteration 700: 1.387154
-Cost after iteration 800: 1.343432
-Cost after iteration 900: 1.296821
+Cost after iteration 0:    2.428576
+Cost after iteration 100:  1.805789
+Cost after iteration 200:  1.734093
+Cost after iteration 300:  1.666927
+Cost after iteration 400:  1.578540
+Cost after iteration 500:  1.518677
+Cost after iteration 600:  1.447230
+Cost after iteration 700:  1.387154
+Cost after iteration 800:  1.343432
+Cost after iteration 900:  1.296821
 Cost after iteration 1000: 1.255538
 Cost after iteration 1100: 1.224694
 Cost after iteration 1200: 1.196546
@@ -36,36 +36,36 @@ Accuracy test :  0.8164
 
 lr = 0.09, epoch = 3000, layers_dims = [784, 20, 12, 4,10]
 
-Cost after iteration 0: 2.428576
-Cost after iteration 100: 1.800332
-Cost after iteration 200: 1.727553
-Cost after iteration 300: 1.663585
-Cost after iteration 400: 1.561597
-Cost after iteration 500: 1.508162
-Cost after iteration 600: 1.423595
-Cost after iteration 700: 1.371207
-Cost after iteration 800: 1.322879
-Cost after iteration 900: 1.273603
-Cost after iteration 1000: 1.235204
-Cost after iteration 1100: 1.205486
-Cost after iteration 1200: 1.168613
-Cost after iteration 1300: 1.118754
-Cost after iteration 1400: 1.057026
-Cost after iteration 1500: 0.954359
-Cost after iteration 1600: 0.885051
-Cost after iteration 1700: 0.843850
-safCost after iteration 1800: 0.816543
-Cost after iteration 1900: 0.795786
-Cost after iteration 2000: 0.774875
-Cost after iteration 2100: 0.756354
-Cost after iteration 2200: 0.743635
-Cost after iteration 2300: 0.731906
-Cost after iteration 2400: 0.719205
-Cost after iteration 2500: 0.707575
-Cost after iteration 2600: 0.672019
-Cost after iteration 2700: 0.657380
-Cost after iteration 2800: 0.648119
-Cost after iteration 2900: 0.640270
+Cost after iteration 0:
+Cost after iteration 100:
+Cost after iteration 200:
+Cost after iteration 300:
+Cost after iteration 400:
+Cost after iteration 500:
+Cost after iteration 600:
+Cost after iteration 700:
+Cost after iteration 800:
+Cost after iteration 900:
+Cost after iteration 1000:
+Cost after iteration 1100:
+Cost after iteration 1200:
+Cost after iteration 1300:
+Cost after iteration 1400:
+Cost after iteration 1500:
+Cost after iteration 1600:
+Cost after iteration 1700:
+ Cost after iteration 1800
+Cost after iteration 1900:
+Cost after iteration 2000:
+Cost after iteration 2100:
+Cost after iteration 2200:
+Cost after iteration 2300:
+Cost after iteration 2400:
+Cost after iteration 2500:
+Cost after iteration 2600:
+Cost after iteration 2700:
+Cost after iteration 2800:
+Cost after iteration 2900:
 Accuracy:  0.84385
 Accuracy:  0.8312
 Everything good : 0.8312
@@ -73,16 +73,16 @@ Everything good : 0.8312
 
 lr = 0.09, epoch = 5000, layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 
-Cost after iteration 0: 2.366328
-Cost after iteration 100: 1.225832
-Cost after iteration 200: 0.818729
-Cost after iteration 300: 0.699317
-Cost after iteration 400: 0.628653
-Cost after iteration 500: 0.572741
-Cost after iteration 600: 0.534381
-Cost after iteration 700: 0.504342
-Cost after iteration 800: 0.483094
-Cost after iteration 900: 0.465057
+Cost after iteration 0:    2.366328
+Cost after iteration 100:  1.225832
+Cost after iteration 200:  0.818729
+Cost after iteration 300:  0.699317
+Cost after iteration 400:  0.628653
+Cost after iteration 500:  0.572741
+Cost after iteration 600:  0.534381
+Cost after iteration 700:  0.504342
+Cost after iteration 800:  0.483094
+Cost after iteration 900:  0.465057
 Cost after iteration 1000: 0.450845
 Cost after iteration 1100: 0.435297
 Cost after iteration 1200: 0.427395
@@ -105,11 +105,8 @@ Cost after iteration 2800: 0.344726
 Cost after iteration 2900: 0.342223
 Cost after iteration 3000: 0.339974
 Cost after iteration 3100: 0.337382
-Cost after iteration 3200: 0.345346
-Cost after iteration 3300: 0.338676
-Cost after iteration 3400: 0.380646
-Cost after iteration 3500: 0.350494
-Cost after iteration 3600: 0.340777
+Cost after iteration 3200: 0.335346
+Cost after iteration 3300: 0.334676
 Cost after iteration 3700: 0.334204
 Cost after iteration 3800: 0.329104
 Cost after iteration 3900: 0.325970
@@ -125,51 +122,51 @@ Everything good : 0.8668
 lr = 0.09, epoch = 5000, layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 
 
-Cost after iteration 0: 2.366328
-Cost after iteration 100: 0.954042
-Cost after iteration 200: 0.708657
-Cost after iteration 300: 0.572454
-Cost after iteration 400: 0.516749
-Cost after iteration 500: 0.483515
-Cost after iteration 600: 0.440604
-Cost after iteration 700: 0.355919
-Cost after iteration 800: 0.303608
-Cost after iteration 900: 0.217343
-Cost after iteration 1000: 0.197198
-Cost after iteration 1100: 0.184492
-Cost after iteration 1200: 0.170314
-Cost after iteration 1300: 0.167487
-Cost after iteration 1400: 0.241246
-Cost after iteration 1500: 0.170838
-Cost after iteration 1600: 0.155843
-Cost after iteration 1700: 0.146752
-Cost after iteration 1800: 0.140119
-Cost after iteration 1900: 0.134558
-Cost after iteration 2000: 0.128673
-Cost after iteration 2100: 0.122581
-Cost after iteration 2200: 0.117833
-Cost after iteration 2300: 0.114095
-Cost after iteration 2400: 0.112106
-Cost after iteration 2500: 0.112596
-Cost after iteration 2600: 0.108925
-Cost after iteration 2700: 0.107112
-Cost after iteration 2800: 0.122423
-Cost after iteration 2900: 0.096719
-Cost after iteration 3000: 0.096669
-Cost after iteration 3100: 0.095673
-Cost after iteration 3200: 0.095807
-Cost after iteration 3300: 0.088723
-Cost after iteration 3400: 0.437502
-Cost after iteration 3500: 0.365481
-Cost after iteration 3600: 0.342963
-Cost after iteration 3700: 0.332190
-Cost after iteration 3800: 0.325766
-Cost after iteration 3900: 0.321164
-Cost after iteration 4000: 0.317551
-Cost after iteration 4100: 0.314541
-Cost after iteration 4200: 0.311969
-Cost after iteration 4300: 0.309409
-Cost after iteration 4400: 0.308183
+Cost after iteration 0:    x
+Cost after iteration 100:  x
+Cost after iteration 200:  x
+Cost after iteration 300:  x
+Cost after iteration 400:  x
+Cost after iteration 500:  x
+Cost after iteration 600:  x
+Cost after iteration 700:  x
+Cost after iteration 800:  x
+Cost after iteration 900:  x
+Cost after iteration 1000: x
+Cost after iteration 1100: x
+Cost after iteration 1200: x
+Cost after iteration 1300: x
+Cost after iteration 1400: x
+Cost after iteration 1500: x
+Cost after iteration 1600: x
+Cost after iteration 1700: x
+Cost after iteration 1800: x
+Cost after iteration 1900: x
+Cost after iteration 2000: x
+Cost after iteration 2100: x
+Cost after iteration 2200: x
+Cost after iteration 2300: x
+Cost after iteration 2400: x
+Cost after iteration 2500: x
+Cost after iteration 2600: x
+Cost after iteration 2700: x
+Cost after iteration 2800: x
+Cost after iteration 2900: x
+Cost after iteration 3000: x
+Cost after iteration 3100: x
+Cost after iteration 3200: x
+Cost after iteration 3300: x
+Cost after iteration 3400: x
+Cost after iteration 3500: x
+Cost after iteration 3600: x
+Cost after iteration 3700: x
+Cost after iteration 3800: x
+Cost after iteration 3900: x
+Cost after iteration 4000: x
+Cost after iteration 4100: x
+Cost after iteration 4200: x
+Cost after iteration 4300: x
+Cost after iteration 4400: x
 Accuracy:  0.88215
 Accuracy:  0.8665
 Everything good : 0.8665
@@ -177,16 +174,16 @@ Everything good : 0.8665
 
 lr = 0.1, epoch = 3000, layers_dims = [784, 28, 15, 7, 10] #  5-layer model
 
-Cost after iteration 0: 2.366328
-Cost after iteration 100: 1.155237
-Cost after iteration 200: 0.791232
-Cost after iteration 300: 0.685993
-Cost after iteration 400: 0.605636
-Cost after iteration 500: 0.551136
-Cost after iteration 600: 0.514545
-Cost after iteration 700: 0.486750
-Cost after iteration 800: 0.466964
-Cost after iteration 900: 0.452735
+Cost after iteration 0:    2.366328
+Cost after iteration 100:  1.155237
+Cost after iteration 200:  0.791232
+Cost after iteration 300:  0.685993
+Cost after iteration 400:  0.605636
+Cost after iteration 500:  0.551136
+Cost after iteration 600:  0.514545
+Cost after iteration 700:  0.486750
+Cost after iteration 800:  0.466964
+Cost after iteration 900:  0.452735
 Cost after iteration 1000: 0.437781
 Cost after iteration 1100: 0.422697
 Cost after iteration 1200: 0.411915
@@ -210,3 +207,82 @@ Cost after iteration 2900: 0.348366
 Accuracy:  0.8757166666666667
 Accuracy:  0.8648
 Everything good : 0.8648
+
+
+
+
+
+l = 0.06
+Cost after iteration 0: 2.355066
+Cost after iteration 100: 0.993398
+Cost after iteration 200: 0.598707
+Cost after iteration 300: 0.505958
+Cost after iteration 400: 0.437397
+Cost after iteration 500: 0.397041
+Cost after iteration 600: 0.366553
+Cost after iteration 700: 0.342525
+Cost after iteration 800: 0.325128
+Cost after iteration 900: 0.312564
+Cost after iteration 1000: 0.302370
+Cost after iteration 1100: 0.281489
+Cost after iteration 1200: 0.275051
+Cost after iteration 1300: 0.262036
+Cost after iteration 1400: 0.253526
+Cost after iteration 1500: 0.248438
+Cost after iteration 1600: 0.238794
+Cost after iteration 1700: 0.232169
+Cost after iteration 1800: 0.228216
+Cost after iteration 1900: 0.225946
+Cost after iteration 2000: 0.217631
+Cost after iteration 2100: 0.212942
+Accuracy:  0.9333392857142857
+Accuracy:  0.6146428571428572
+Everything good : 0.6146428571428572
+
+
+l = 0.1
+Cost after iteration 0:    2.327416
+Cost after iteration 100:  1.731686
+Cost after iteration 200:  1.578787
+Cost after iteration 300:  1.507360
+Cost after iteration 400:  1.426808
+Cost after iteration 500:  1.178498
+Cost after iteration 600:  1.024772
+Cost after iteration 700:  0.912192
+Cost after iteration 800:  0.816771
+Cost after iteration 900:  0.737203
+Cost after iteration 1000: 0.716274
+Cost after iteration 1100: 0.660408
+Cost after iteration 1200: 0.620616
+Cost after iteration 1300: 0.573896
+Cost after iteration 1400: 0.541973
+Cost after iteration 1500: 0.516484
+Cost after iteration 1600: 0.486097
+Cost after iteration 1700: 0.465179
+Cost after iteration 1800: 0.442824
+Cost after iteration 1900: 0.426852
+Cost after iteration 2000: 0.414338
+Cost after iteration 2100: 0.402296
+Training accuracy : 0.8970892857142857
+
+Cost after iteration 0:             26.710142
+Cost after iteration 100:           2.302585
+Cost after iteration 200:           2.302585
+aCost after iteration 300:          2.302585
+Cost after iteration 400:           2.302585
+asCost after iteration 500:         2.302585
+Cost after iteration 600:           2.302585
+Cost after iteration 700:           2.302585
+asdCost after iteration 800:        2.302585
+Cost after iteration 900:           2.302585
+
+Cost after iteration 0: 2.299625
+Cost after iteration 100: 0.221136
+Cost after iteration 200: 0.124695
+Cost after iteration 300: 0.086114
+Cost after iteration 400: 0.065101
+Training accuracy : 0.9875892857142857
+Test data accuracy : 0.9263571428571429
+
+
+

@@ -1,5 +1,4 @@
-import time
-import numpy as np
+
 import matplotlib.pyplot as plt
 
 from propagation import *
@@ -19,22 +18,26 @@ def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.085 , num_iter
 
     # Parameters initialization.
     parameters = initialize(activations,layers_dims)
+    # v = initialize_velocity(parameters)
+    v, s = initialize_adam(parameters)
     Y = one_hot_encoding(Y)
     Y = Y.reshape(Y.shape[0],X.shape[1])
     # Loop (gradient descent)
     for i in range(0, num_iterations):
 
         # Forward propagation: [LINEAR -> RELU]*(L-1) -> LINEAR -> SIGMOID.
-        AL, caches = L_model_forward(X, parameters,activations)
+        AL, caches = L_model_forward(X, parameters,activations,layers_dims)
 
         # Compute cost and derivative with respect to output
         cost, dAL  = compute_cost(AL,Y,"cross_entropy")
 
         # Backward propagation.
-        grads = L_model_backward(AL, dAL, Y, caches,activations)
+        grads = L_model_backward(dAL, caches,activations)
 
         # Update parameters.
-        parameters = update_parameters(parameters, grads, learning_rate)
+        # parameters = update_parameters(parameters, grads, learning_rate)
+        # parameters,v  = update_parameters_with_momentum(parameters, grads, v, learning_rate, beta=0.9)
+        parameters, v, s = update_parameters_with_adam(parameters, grads, v, s, t=2)
 
         # Print the cost every 100 training example
         if print_cost and i % 100 == 0:
@@ -51,23 +54,25 @@ def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.085 , num_iter
 
     return parameters
 
-train_x,train_y,test_x,test_y = load_cifar('./Assignment One/cifar-10-python/cifar-10-batches-py')
-# train_x,train_y,test_x,test_y = load_mnist("mnist.data",split=0.8)
 
+def predict(X, y, parameters,activations):
 
-### CONSTANTS ###
-activations = ["relu","relu","relu","relu"]
+    m = X.shape[1]
+    n = len(parameters) // 2  # number of layers in the neural network
+    p = np.zeros((1, m), dtype=int)
+    # Forward propagation
+    probas, caches = L_model_forward(X, parameters,activations)
 
-layers_dims = [3072, 28, 15, 7, 10] #  5-layer model for cifar-10 data
-# layers_dims = [784, 12, 7, 4, 10] #  5-layer model for mnist data
+    predicted_output = np.argmax(probas, axis=0)
 
-parameters = L_layer_model(train_x,train_y , activations, layers_dims, num_iterations=800, print_cost=True)
+    y = y.reshape(predicted_output.shape)
 
-pred_train = predict(train_x, train_y, parameters,activations)
+    correct_labels = 0
 
-pred_test = predict(test_x, test_y, parameters,activations)
+    number_of_samples = len(predicted_output)
 
-print("Training accuracy :", pred_train)
+    for i in range(0, number_of_samples):
+        if (predicted_output[i] == y[i]):
+            correct_labels += 1
 
-print("Test data accuracy :", pred_test)
-
+    return correct_labels / number_of_samples

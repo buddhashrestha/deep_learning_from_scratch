@@ -75,8 +75,8 @@ def load_cifar(path):
     Ytr = np.concatenate(ys)
     del X, Y
     Xte, Yte = load_CIFAR_batch(os.path.join(path, 'test_batch'))
-    return Xtr.reshape(-1,Xtr.shape[0])[:30000], Ytr, \
-           Xte.reshape(-1,Xte.shape[0])[:4000], Yte
+    return Xtr.reshape(-1,Xtr.shape[0]), Ytr.reshape(1,-1), \
+           Xte.reshape(-1,Xte.shape[0]), Yte.reshape(1,-1)
 
 def load_mnist(path,split=0.8):
     mnist =  pickle.load(open(path, "rb"))

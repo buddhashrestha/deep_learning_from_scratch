@@ -79,12 +79,11 @@ def hyperbolic_tangent(Z):
     return A, cache
 
 
-def hyperbolic_tangent_derivative(x):
-    A = 1.0 - np.square(x)
+def hyperbolic_tangent_derivative(dA,cache):
+    Z = cache
 
-    cache = Z
+    dZ = 1.0 - np.square(dA)
 
-    return A, cache
+    return dZ
 
 
-##TODO: LEAKY RELU
