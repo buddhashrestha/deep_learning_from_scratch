@@ -292,7 +292,7 @@ def main():
     # layers of size M, N and a output layer of size 10, hence 4
     # layers(including input layer), more layers can be added to the list for increasing layers
     model = DNN([3072, 50, 30, 10])  # initialize the model
-    model.train(X_train, y_train, epochs=15)  # train the model
+    model.train(X_train, y_train, epochs=500)  # train the model
     model.eval(X_val, y_val)  # check accuracy using validation set
     # preprocess test dataset
     test_X = unpickle("./Assignment One/cifar-10-python/cifar-10-batches-py/test_batch")["data"] / 255.0
