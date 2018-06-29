@@ -46,11 +46,11 @@ def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.085 , num_iter
 
 
     #plot the cost
-    plt.plot(np.squeeze(costs))
-    plt.ylabel('cost')
-    plt.xlabel('iterations (per tens)')
-    plt.title("Learning rate =" + str(learning_rate))
-    plt.show()
+    # plt.plot(np.squeeze(costs))
+    # plt.ylabel('cost')
+    # plt.xlabel('iterations (per tens)')
+    # plt.title("Learning rate =" + str(learning_rate))
+    # plt.show()
 
     return parameters
 
