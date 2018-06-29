@@ -298,8 +298,8 @@ def main():
     test_X = unpickle("./Assignment One/cifar-10-python/cifar-10-batches-py/test_batch")["data"] / 255.0
     test_X = test_X.reshape(-1, 3072, 1)
     # make predictions of test dataset
-    print
-    model.predict(test_X)
+    print(model.predict(test_X))
+
 
 
 main()
