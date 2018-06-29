@@ -190,7 +190,7 @@ class DNN(object):
         for j in range(epochs):
             batch_iter = self.get_batch(X, y, batch_size)
             for i in range(n_batches):
-                batch = batch_iter.next()
+                batch = batch_iter.__next__()
                 # same shape as self.biases
                 del_b = [np.zeros(b.shape) for b in self.biases]
                 # same shape as self.weights
