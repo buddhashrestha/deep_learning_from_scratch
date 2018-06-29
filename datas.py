@@ -101,4 +101,4 @@ def split_test_train(data_name, percentage=0.8):
     return train_x,train_y,test_x,test_y
 
 def whiten_data(x):
-    return x/255
+        return x/255

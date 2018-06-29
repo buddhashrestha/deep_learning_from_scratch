@@ -245,7 +245,7 @@ class DNN(object):
         # updating gradients of each layer using reverse or negative indexing, by propagating
         # gradients of previous layers to current layer so that gradients of weights and biases
         # at each layer can be calculated
-        for l in xrange(2, self.num_layers):
+        for l in range(2, self.num_layers):
             out = outs[-l]
             delta_activation = delta_sigmoid(out)
             delta = np.dot(self.weights[-l + 1].T, delta) * delta_activation
@@ -286,7 +286,7 @@ class DNN(object):
 
 def main():
     X, y = preprocess(num_to_load=1)
-    X_train, y_train, X_val, y_val = load_cifar('./Assignment One/cifar-10-python/cifar-10-batches-py')
+    X_train, y_train, X_val, y_val = dataset_split(X, y)
     # 32*32*3=3072, height and width of an image in the dataset is 32 and 3 is for RGB channel
     # [3072,1000,100,10] implies a neural network with 1 input layer of size 3072, 3 hidden
     # layers of size M, N and a output layer of size 10, hence 4
