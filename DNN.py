@@ -21,7 +21,7 @@ def merge_batches(num_to_load=1):
     Outputs: merged features and labels from specified no. of batches of CIFAR-10
     '''
     for i in range(1):
-        fileName = "/home/buddha/projects/deep_learning_from_scratch/Assignment One/cifar-10-python/cifar-10-batches-py/data_batch_" + str(i + 1)
+        fileName = "./Assignment One/cifar-10-python/cifar-10-batches-py/data_batch_" + str(i + 1)
         print(fileName)
         data = unpickle(fileName)
         if i == 0:
