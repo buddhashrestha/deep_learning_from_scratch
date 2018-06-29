@@ -11,7 +11,7 @@ def get_CIFAR10_data(cifar10_dir, num_training=49000, num_validation=1000, num_t
     it for the neural net classifier.
     '''
     # Load the raw CIFAR-10 data
-    X_train, y_train, X_test, y_test = load_cifar(cifar10_dir)
+    X_train, y_train, X_test, y_test = load(cifar10_dir)
 
     # Subsample the data
     mask = range(num_training, num_training + num_validation)
@@ -62,7 +62,7 @@ def load_CIFAR_batch(filename):
         return X, Y
 
 
-def load_cifar(path):
+def load(path):
     ''' load all of cifar '''
     xs = []
     ys = []
@@ -77,6 +77,13 @@ def load_cifar(path):
     Xte, Yte = load_CIFAR_batch(os.path.join(path, 'test_batch'))
     return Xtr.reshape(-1,Xtr.shape[0]), Ytr.reshape(1,-1), \
            Xte.reshape(-1,Xte.shape[0]), Yte.reshape(1,-1)
+
+def load_cifar(path):
+    train_x, train_y, test_x, test_y = load(path)
+    train_x = whiten_data(train_x)
+    test_x = whiten_data(test_x)
+    return train_x, train_y, test_x, test_y
+
 
 def load_mnist(path,split=0.8):
     mnist =  pickle.load(open(path, "rb"))

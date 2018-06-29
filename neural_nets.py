@@ -26,13 +26,13 @@ def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.085 , num_iter
     for i in range(0, num_iterations):
 
         # Forward propagation: [LINEAR -> RELU]*(L-1) -> LINEAR -> SIGMOID.
-        AL, caches = L_model_forward(X, parameters,activations,layers_dims)
+        AL, caches = L_model_forward(X, parameters,activations)
 
         # Compute cost and derivative with respect to output
         cost, dAL  = compute_cost(AL,Y,"cross_entropy")
 
         # Backward propagation.
-        grads = L_model_backward(dAL, caches,activations)
+        grads = L_model_backward(dAL, caches,parameters,activations)
 
         # Update parameters.
         # parameters = update_parameters(parameters, grads, learning_rate)
