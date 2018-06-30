@@ -107,10 +107,10 @@ def model(X, Y,activations, layers_dims, optimizer, learning_rate=0.07, mini_bat
             (minibatch_X, minibatch_Y) = minibatch
 
             # Forward propagation: [LINEAR -> RELU]*(L-1) -> LINEAR -> SIGMOID.
-            AL, caches = L_model_forward(X, parameters, activations)
+            AL, caches = L_model_forward(minibatch_X, parameters, activations)
 
             # Compute cost and derivative with respect to output
-            cost, dAL = compute_cost(AL, Y, "cross_entropy")
+            cost, dAL = compute_cost(AL, minibatch_Y, "cross_entropy")
 
             # Backward propagation.
             grads = L_model_backward(dAL, caches, parameters, activations)

@@ -8,7 +8,7 @@ train_x,train_y,test_x,test_y = load_cifar('./Assignment One/cifar-10-python/cif
 #
 #
 # ## CONSTANTS ###
-activations = ["relu","relu","relu","relu"]
+activations = ["relu","relu","relu","tanh"]
 
 layers_dims = [3072, 128, 128, 100, 10] #  5-layer model for cifar-10 data
 
