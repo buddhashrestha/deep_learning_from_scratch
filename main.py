@@ -36,7 +36,9 @@ print("Test data accuracy :", pred_test)
 #
 # layers_dims = [784, 25, 12, 7, 10] #  5-layer model for mnist data
 #
-# parameters = L_layer_model(train_x,train_y , activations, layers_dims, num_iterations=1000, print_cost=True)
+# # parameters = L_layer_model(train_x,train_y , activations, layers_dims, num_iterations=1000, print_cost=True)
+# #
+# parameters = model(train_x, train_y,activations, layers_dims, optimizer="adam")
 #
 # pred_train = predict(train_x, train_y, parameters,activations)
 #

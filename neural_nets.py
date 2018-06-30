@@ -118,7 +118,7 @@ def model(X, Y,activations, layers_dims, optimizer, learning_rate=0.07, mini_bat
             # Update parameters.
             # parameters = update_parameters(parameters, grads, learning_rate)
             # parameters,v  = update_parameters_with_momentum(parameters, grads, v, learning_rate, beta=0.9)
-            parameters, v, s = update_parameters_with_adam(parameters, grads, v, s, t=2)
+            # parameters, v, s = update_parameters_with_adam(parameters, grads, v, s, t=2)
 
             # Update parameters
             if optimizer == "gd":

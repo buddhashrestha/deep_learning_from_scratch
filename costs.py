@@ -6,9 +6,9 @@ import numpy as np
 def compute_cost(AL, Y, loss="cross_entropy"):
     if(loss == "cross_entropy"):
         cost = cross_entropy(AL, Y)
-        print("COST : ",cost)
+        # print("COST : ",cost)
         derivative = cross_entropy_backward(AL, Y)
-        print("DAL: \n\n\n\n",derivative)
+        # print("DAL: \n\n\n\n",derivative)
         return cost, derivative
     else:
         cost = mean_squared_error(AL, Y)
@@ -16,7 +16,6 @@ def compute_cost(AL, Y, loss="cross_entropy"):
         return cost, derivative
 
 def cross_entropy(AL, Y):
-    print("AL: ",AL)
     AL_log = -np.log(AL)
 
     each_element = np.multiply(AL_log, Y)
