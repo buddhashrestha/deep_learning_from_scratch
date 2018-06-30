@@ -55,6 +55,7 @@ def L_layer_model(X, Y, activations, layers_dims, learning_rate=0.085 , num_iter
     return parameters
 
 
+
 def model(X, Y,activations, layers_dims, optimizer, learning_rate=0.07, mini_batch_size=2048, beta=0.9,
           beta1=0.9, beta2=0.999, epsilon=1e-8, num_epochs=1000, print_cost=True):
     """
