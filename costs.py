@@ -8,6 +8,7 @@ def compute_cost(AL, Y, loss="cross_entropy"):
         cost = cross_entropy(AL, Y)
         print("COST : ",cost)
         derivative = cross_entropy_backward(AL, Y)
+        print("DAL: \n\n\n\n",derivative)
         return cost, derivative
     else:
         cost = mean_squared_error(AL, Y)
