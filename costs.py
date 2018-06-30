@@ -14,7 +14,7 @@ def compute_cost(AL, Y, loss="cross_entropy"):
         return cost, derivative
 
 def cross_entropy(AL, Y):
-
+    print(AL)
     AL_log = -np.log(AL)
 
     each_element = np.multiply(AL_log, Y)
