@@ -10,7 +10,7 @@ train_x,train_y,test_x,test_y = load_cifar('./Assignment One/cifar-10-python/cif
 # ## CONSTANTS ###
 activations = ["relu","relu","relu","relu"]
 
-layers_dims = [3072, 30, 20, 15, 10] #  5-layer model for cifar-10 data
+layers_dims = [3072, 128, 128, 100, 10] #  5-layer model for cifar-10 data
 
 # parameters = L_layer_model(train_x,train_y , activations, layers_dims, 0.5, num_iterations=500, print_cost=True)
 parameters = model(train_x, train_y,activations, layers_dims, optimizer="adam")
