@@ -131,7 +131,7 @@ def model(X, Y,activations, layers_dims, optimizer, learning_rate=0.07, mini_bat
                                                                t, learning_rate, beta1, beta2, epsilon)
 
         # Print the cost every 1000 epoch
-        if print_cost and i % 1000 == 0:
+        if print_cost and i % 50 == 0:
             print("Cost after epoch %i: %f" % (i, cost))
         if print_cost and i % 100 == 0:
             costs.append(cost)
