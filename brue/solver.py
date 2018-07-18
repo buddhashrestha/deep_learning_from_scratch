@@ -304,3 +304,4 @@ class Solver(object):
 
         # At the end of training swap the best params into the model
         self.model.params = self.best_params
+        return train_acc, val_acc

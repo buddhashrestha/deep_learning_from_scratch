@@ -3,11 +3,11 @@ import numpy as np
 
 
 def xavier_weight_initializer(output_dims, input_dims):
-    return np.random.randn(output_dims, input_dims) * np.sqrt(1.0 / input_dims)
+    return np.random.normal(0,output_dims, input_dims) * np.sqrt(1.0 / input_dims)
 
-def he_weight_initializer(output_dims, input_dims):
+def he_weight_initializer(input_dims, output_dims):
 
-    return np.random.randn(output_dims, input_dims) * np.sqrt(2.0 / input_dims)
+    return np.random.normal(0,2.461858e-02,[input_dims, output_dims]) #* np.sqrt(2.0 / output_dims)
 
 
 def initialize_velocity(parameters):

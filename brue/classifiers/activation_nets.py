@@ -2,7 +2,7 @@ from propagation import *
 from loss import *
 from initializations import *
 
-class FullyConnectedNet(object):
+class ActivationNet(object):
     """
     A fully-connected neural network with an arbitrary number of hidden layers,
     ReLU nonlinearities, and a softmax loss function. This will also implement
@@ -48,42 +48,37 @@ class FullyConnectedNet(object):
         self.activations = activations
         self.dtype = dtype
         self.params = {}
+        params1 = {}
+        input_dims = input_dim
+        # # Initialise toutput_dimshe weights and biases for each fully connected layer connected to a Relu.
+        for i in range(self.num_layers - 1):
+            self.params['W' + str(i+1)] = he_weight_initializer(input_dims,hidden_dims[i])
+            self.params['b' + str(i+1)] = np.zeros([hidden_dims[i]])
 
-        ############################################################################
-        # TODO: Initialize the parameters of the network, storing all values in    #
-        # the self.params dictionary. Store weights and biases for the first layer #
-        # in W1 and b1; for the second layer use W2 and b2, etc. Weights should be #
-        # initialized from a normal distribution with standard deviation equal to  #
-        # weight_scale and biases should be initialized to zero.                   #
-        #                                                                          #
-        # When using batch normalization, store scale and shift parameters for the #
-        # first layer in gamma1 and beta1; for the second layer use gamma2 and     #
-        # beta2, etc. Scale parameters should be initialized to one and shift      #
-        # parameters should be initialized to zero.                                #
-        ############################################################################
+            if self.use_batchnorm:
+                self.params['beta' + str(i+1)] = np.zeros([hidden_dims[i]])
+                self.params['gamma' + str(i+1)] = np.ones([hidden_dims[i]])
 
-        # Initialise the weights and biases for each fully connected layer connected to a Relu.
-        params = initialize(activations,hidden_dims,input_dim)
-        self.params=params
+            input_dims = hidden_dims[i]  # Set the input dim of next layer to be output dim of current layer.
+
+        #Initialise the weights and biases for final FC layer
+        self.params['W' + str(self.num_layers)] = he_weight_initializer(input_dims,num_classes)
+        self.params['b' + str(self.num_layers)] = np.zeros([num_classes])
+        #
+        # # Initialise the weights and biases for each fully connected layer connected to a Relu.
         # for i in range(self.num_layers - 1):
-        #     self.params['W' + str(i+1)] = np.random.normal(0, weight_scale, [input_dim, hidden_dims[i]])
-        #     self.params['b' + str(i+1)] = np.zeros([hidden_dims[i]])
+        #     self.params['W' + str(i + 1)] = np.random.normal(0, weight_scale, [input_dim, hidden_dims[i]])
+        #     self.params['b' + str(i + 1)] = np.zeros([hidden_dims[i]])
         #
         #     if self.use_batchnorm:
-        #         self.params['beta' + str(i+1)] = np.zeros([hidden_dims[i]])
-        #         self.params['gamma' + str(i+1)] = np.ones([hidden_dims[i]])
+        #         self.params['beta' + str(i + 1)] = np.zeros([hidden_dims[i]])
+        #         self.params['gamma' + str(i + 1)] = np.ones([hidden_dims[i]])
         #
         #     input_dim = hidden_dims[i]  # Set the input dim of next layer to be output dim of current layer.
-
-        # Initialise the weights and biases for final FC layer
-        self.params['W' + str(self.num_layers)] = np.random.normal(0, weight_scale, [hidden_dims[-1], num_classes])
-        self.params['b' + str(self.num_layers)] = np.zeros([num_classes])
-
-
-
-        ############################################################################
-        #                             END OF YOUR CODE                             #
-        ############################################################################
+        #
+        # # Initialise the weights and biases for final FC layer
+        # self.params['W' + str(self.num_layers)] = np.random.normal(0, weight_scale, [input_dim, num_classes])
+        # self.params['b' + str(self.num_layers)] = np.zeros([num_classes])
 
         # When using dropout we need to pass a dropout_param dictionary to each
         # dropout layer so that the layer knows the dropout probability and the mode
@@ -126,41 +121,30 @@ class FullyConnectedNet(object):
                 bn_param['mode'] = mode
 
         scores = None
-        ############################################################################
-        # TODO: Implement the forward pass for the fully-connected net, computing  #
-        # the class scores for X and storing them in the scores variable.          #
-        #                                                                          #
-        # When using dropout, you'll need to pass self.dropout_param to each       #
-        # dropout forward pass.                                                    #
-        #                                                                          #
-        # When using batch normalization, you'll need to pass self.bn_params[0] to #
-        # the forward pass for the first batch normalization layer, pass           #
-        # self.bn_params[1] to the forward pass for the second batch normalization #
-        # layer, etc.                                                              #
-        ############################################################################
+
 
         fc_cache = {}
-        relu_cache = {}
+        actv_cache={}
         bn_cache = {}
         dropout_cache = {}
         batch_size = X.shape[0]
 
         X = np.reshape(X, [batch_size, -1])  # Flatten our input images.
 
-        # Do as many Affine-Relu forward passes as required (num_layers - 1).
+        # Do as many Affine-Activation forward passes as required (num_layers - 1).
         # Apply batch norm and dropout as required.
         for i in range(self.num_layers-1):
 
             fc_act, fc_cache[str(i+1)] = affine_forward(X, self.params['W'+str(i+1)], self.params['b'+str(i+1)])
             if self.use_batchnorm:
                 bn_act, bn_cache[str(i+1)] = batchnorm_forward(fc_act, self.params['gamma'+str(i+1)], self.params['beta'+str(i+1)], self.bn_params[i])
-                relu_act, relu_cache[str(i+1)] = relu_forward(bn_act)
+                actv, actv_cache[str(i+1)] = activation_forward(bn_act,self.activations[i])
             else:
-                relu_act, relu_cache[str(i+1)] = relu_forward(fc_act)
+                actv, actv_cache[str(i+1)] = activation_forward(fc_act,self.activations[i])
             if self.use_dropout:
-                relu_act, dropout_cache[str(i+1)] = dropout_forward(relu_act, self.dropout_param)
+                actv, dropout_cache[str(i+1)] = dropout_forward(actv, self.dropout_param)
 
-            X = relu_act.copy()  # Result of one pass through the affine-relu block.
+            X = actv.copy()  # Result of one pass through the affine-relu block.
 
         # Final output layer is FC layer with no relu.
         scores, final_cache = affine_forward(X, self.params['W'+str(self.num_layers)], self.params['b'+str(self.num_layers)])
@@ -174,19 +158,6 @@ class FullyConnectedNet(object):
             return scores
 
         loss, grads = 0.0, {}
-        ############################################################################
-        # TODO: Implement the backward pass for the fully-connected net. Store the #
-        # loss in the loss variable and gradients in the grads dictionary. Compute #
-        # data loss using softmax, and make sure that grads[k] holds the gradients #
-        # for self.params[k]. Don't forget to add L2 regularization!               #
-        #                                                                          #
-        # When using batch normalization, you don't need to regularize the scale   #
-        # and shift parameters.                                                    #
-        #                                                                          #
-        # NOTE: To ensure that your implementation matches ours and you pass the   #
-        # automated tests, make sure that your L2 regularization includes a factor #
-        # of 0.5 to simplify the expression for the gradient.                      #
-        ############################################################################
 
         # Calculate score loss and add reg. loss for last FC layer.
         loss, dsoft = softmax_loss(scores, y)
@@ -205,16 +176,15 @@ class FullyConnectedNet(object):
 
             if self.use_dropout:
                 dx_last = dropout_backward(dx_last, dropout_cache[str(i)])
-
-            drelu = relu_backward(dx_last, relu_cache[str(i)])
+            dz_actv = activation_backward(dx_last, actv_cache[str(i)],self.activations[i-1])
 
             if self.use_batchnorm:
-                dbatchnorm, dgamma, dbeta = batchnorm_backward(drelu, bn_cache[str(i)])
+                dbatchnorm, dgamma, dbeta = batchnorm_backward(dz_actv, bn_cache[str(i)])
                 dx_last, dw_last, db_last = affine_backward(dbatchnorm, fc_cache[str(i)])
                 grads['beta' + str(i)] = dbeta
                 grads['gamma' + str(i)] = dgamma
             else:
-                dx_last, dw_last, db_last = affine_backward(drelu, fc_cache[str(i)])
+                dx_last, dw_last, db_last = affine_backward(dz_actv, fc_cache[str(i)])
 
             # Store gradients.
             grads['W' + str(i)] = dw_last + self.reg * self.params['W' + str(i)]
@@ -222,10 +192,5 @@ class FullyConnectedNet(object):
 
             # Add reg. loss for each other FC layer.
             loss += 0.5 * self.reg * (np.sum(np.square(self.params['W' + str(i)])))
-
-
-        ############################################################################
-        #                             END OF YOUR CODE                             #
-        ############################################################################
 
         return loss, grads
