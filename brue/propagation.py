@@ -1,6 +1,6 @@
 from builtins import range
 import numpy as np
-
+from activations import *
 
 def affine_forward(x, w, b):
     """
@@ -84,6 +84,34 @@ def affine_backward(dout, cache):
     ###########################################################################
     return dx, dw, db
 
+
+def activation_forward(Z,activation):
+
+    if activation == "sigmoid":
+        return sigmoid(Z)
+
+    elif activation == "relu":
+        return relu(Z)
+
+    elif activation == "bipolar_sigmoid":
+        return bipolar_sigmoid(Z)
+
+    elif activation == "tanh":
+        return hyperbolic_tangent(Z)
+
+def activation_backward(dA,cache, activation):
+
+    if activation == "sigmoid":
+        return sigmoid_backward(dA,cache)
+
+    elif activation == "relu":
+        return relu_backward(dA,cache)
+
+    elif activation == "bipolar_sigmoid":
+        return bipolar_sigmoid_backward(dA,cache)
+
+    elif activation == "tanh":
+        return hyperbolic_tangent_backward(dA,cache)
 
 def relu_forward(x):
     """

@@ -4,7 +4,7 @@ from data_utils import *
 
 data = load_mnist()
 
-# data = get_CIFAR10_data()
+data = get_CIFAR10_data()
 print(data['X_train'].shape)
 best_model = None
 ################################################################################
@@ -19,7 +19,8 @@ learning_rate = 0.008
 # ### CONSTANTS ###
 activations = ["relu","relu","relu","relu"]
 model = FullyConnectedNet([100, 100, 100, 100],activations,
-                          input_dim=784,
+                          input_dim=3072,
+                            dropout=0.0, use_batchnorm=False, reg=0.0,
                 weight_scale=weight_scale, dtype=np.float64)
 solver = Solver(model, data,
                 print_every=100, num_epochs=10, batch_size=250,
